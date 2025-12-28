@@ -1,8 +1,0 @@
-name: ConnectionMsgs
-version: 1.1
-author: Imptovskii
-main: dev.newplaces.connectionmsgs.ConnectionMsgsPlugin
-commands:
-  toggleconnectionmsgs:
-    description: Toggles connection messages visibility
-    usage: /<command>
