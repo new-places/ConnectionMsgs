@@ -1,10 +1,8 @@
 name: ConnectionMsgs
 version: 1.0
 author: Imptovskii
-
 main: dev.newplaces.connectionmsgs.ConnectionMsgsPlugin
-
 commands:
   toggleconnectionmsgs:
-    description: toggle join and leave messages
-    usage: "toggleconnectionmsgs"
+    description: Toggles connection messages visibility
+    usage: /<command>
