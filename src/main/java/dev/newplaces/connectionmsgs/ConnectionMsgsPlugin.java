@@ -79,7 +79,7 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
         enabledPlayers.add(player.getUniqueId());
         event.setJoinMessage(null);
 
-        String joinMessage = getFormattedMessage("messages.join", player.getName());
+        String joinMessage = getFormattedMessage("messages.join", "%player%", player.getName());
         
         for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
             if (enabledPlayers.contains(onlinePlayer.getUniqueId())) {
@@ -98,7 +98,7 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
         }
         event.setQuitMessage(null);
 
-        String quitMessage = getFormattedMessage("messages.quit", player.getName());
+        String quitMessage = getFormattedMessage("messages.quit", "%player%", player.getName());
         
         for (Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
             if (enabledPlayers.contains(onlinePlayer.getUniqueId())) {
@@ -109,9 +109,12 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
 
     private String getFormattedMessage(String path, String... replacements) {
         String message = config.getString(path, "");
-        for (int i = 0; i < replacements.length; i += 2) {
+        
+        // Process replacements in pairs (search, replace)
+        for (int i = 0; i < replacements.length - 1; i += 2) {
             message = message.replace(replacements[i], replacements[i + 1]);
         }
+        
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 }
