@@ -41,8 +41,8 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
     private void setupConfigDefaults() {
         config.addDefault("messages.toggle-off", "&aСообщения подключения были скрыты.");
         config.addDefault("messages.toggle-on", "&aСообщения подключения снова видны.");
-        config.addDefault("messages.join", "&7%player% &fприсоединился к серверу");
-        config.addDefault("messages.quit", "&7%player% &fотключился от сервера");
+        config.addDefault("messages.join", "&7%player% присоединился к серверу");
+        config.addDefault("messages.quit", "&7%player% отключился от сервера");
         config.addDefault("messages.console-error", "&cЭта команда может быть использована только игроком в игре.");
         
         // Admin command messages
