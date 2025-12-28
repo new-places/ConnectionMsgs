@@ -1,6 +1,7 @@
 name: ConnectionMsgs
 version: 1.1
 main: dev.newplaces.connectionmsgs.ConnectionMsgsPlugin
+author: Imptovskii
 api-version: 1.13
 commands:
   toggleconnectionmsgs:

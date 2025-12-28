@@ -12,5 +12,6 @@ messages:
   version-info: |-
     &eConnectionMsgs версия: &b%version%
     &eАвтор: &b%author%
+    &eРазработан для проекта /new places/ на базе 2b2tJoinLeave с Oldfag.org
   unknown-subcommand: '&cНеизвестная подкоманда. Используйте /connectionmsgs без параметров для справки.'
   console-only: '&cЭта команда доступна только в консоли сервера.'
