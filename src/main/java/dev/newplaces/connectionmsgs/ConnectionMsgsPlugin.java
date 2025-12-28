@@ -33,8 +33,9 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
         
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         
-        // Register command executor
+        // Register command executors
         getCommand("toggleconnectionmsgs").setExecutor(this);
+        getCommand("connectionmsgs").setExecutor(this);
     }
 
     private void setupConfigDefaults() {
@@ -44,33 +45,75 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
         config.addDefault("messages.quit", "&7%player% &fотключился от сервера");
         config.addDefault("messages.console-error", "&cЭта команда может быть использована только игроком в игре.");
         
+        // Admin command messages
+        config.addDefault("messages.admin-help", "&eConnectionMsgs команды:\n&b/connectionmsgs reload &7- перезагрузить конфигурацию\n&b/connectionmsgs version &7- показать версию плагина");
+        config.addDefault("messages.config-reloaded", "&aКонфигурация ConnectionMsgs успешно перезагружена!");
+        config.addDefault("messages.version-info", "&eConnectionMsgs версия: &b%version%\n&eАвтор: &b%author%");
+        config.addDefault("messages.unknown-subcommand", "&cНеизвестная подкоманда. Используйте /connectionmsgs без параметров для справки.");
+        config.addDefault("messages.console-only", "&cЭта команда доступна только в консоли сервера.");
+        
         config.options().copyDefaults(true);
         saveConfig();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!command.getName().equalsIgnoreCase("toggleconnectionmsgs")) {
-            return false;
-        }
-        
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', 
-                config.getString("messages.console-error", "&cЭта команда может быть использована только игроком в игре.")));
+        // Handle toggleconnectionmsgs command
+        if (command.getName().equalsIgnoreCase("toggleconnectionmsgs")) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(getFormattedMessage("messages.console-error"));
+                return true;
+            }
+
+            Player player = (Player) sender;
+            UUID playerId = player.getUniqueId();
+
+            if (enabledPlayers.contains(playerId)) {
+                enabledPlayers.remove(playerId);
+                player.sendMessage(getFormattedMessage("messages.toggle-off"));
+            } else {
+                enabledPlayers.add(playerId);
+                player.sendMessage(getFormattedMessage("messages.toggle-on"));
+            }
             return true;
         }
-
-        Player player = (Player) sender;
-        UUID playerId = player.getUniqueId();
-
-        if (enabledPlayers.contains(playerId)) {
-            enabledPlayers.remove(playerId);
-            player.sendMessage(getFormattedMessage("messages.toggle-off"));
-        } else {
-            enabledPlayers.add(playerId);
-            player.sendMessage(getFormattedMessage("messages.toggle-on"));
+        
+        // Handle connectionmsgs command (console only)
+        if (command.getName().equalsIgnoreCase("connectionmsgs")) {
+            // Check if command is executed from console
+            if (sender instanceof Player) {
+                sender.sendMessage(getFormattedMessage("messages.console-only"));
+                return true;
+            }
+            
+            if (args.length == 0) {
+                sender.sendMessage(getFormattedMessage("messages.admin-help"));
+                return true;
+            }
+            
+            if (args[0].equalsIgnoreCase("reload")) {
+                // Reload configuration
+                reloadConfig();
+                config = getConfig();
+                setupConfigDefaults(); // Ensure defaults are set
+                
+                sender.sendMessage(getFormattedMessage("messages.config-reloaded"));
+                return true;
+            }
+            
+            if (args[0].equalsIgnoreCase("version")) {
+                String versionInfo = getFormattedMessage("messages.version-info", 
+                    "%version%", getDescription().getVersion(),
+                    "%author%", String.join(", ", getDescription().getAuthors()));
+                sender.sendMessage(versionInfo);
+                return true;
+            }
+            
+            sender.sendMessage(getFormattedMessage("messages.unknown-subcommand"));
+            return true;
         }
-        return true;
+        
+        return false;
     }
 
     @EventHandler
@@ -112,7 +155,9 @@ public class ConnectionMsgsPlugin extends JavaPlugin implements Listener {
         
         // Process replacements in pairs (search, replace)
         for (int i = 0; i < replacements.length - 1; i += 2) {
-            message = message.replace(replacements[i], replacements[i + 1]);
+            String placeholder = replacements[i];
+            String replacement = replacements[i + 1];
+            message = message.replace(placeholder, replacement);
         }
         
         return ChatColor.translateAlternateColorCodes('&', message);

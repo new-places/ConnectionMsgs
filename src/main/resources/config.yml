@@ -4,3 +4,13 @@ messages:
   join: '&7%player% &fприсоединился к серверу'
   quit: '&7%player% &fотключился от сервера'
   console-error: '&cЭта команда может быть использована только игроком в игре.'
+  admin-help: |-
+    &eConnectionMsgs команды:
+    &b/connectionmsgs reload &7- перезагрузить конфигурацию
+    &b/connectionmsgs version &7- показать версию плагина
+  config-reloaded: '&aКонфигурация ConnectionMsgs успешно перезагружена!'
+  version-info: |-
+    &eConnectionMsgs версия: &b%version%
+    &eАвтор: &b%author%
+  unknown-subcommand: '&cНеизвестная подкоманда. Используйте /connectionmsgs без параметров для справки.'
+  console-only: '&cЭта команда доступна только в консоли сервера.'
