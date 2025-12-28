@@ -1,11 +1,13 @@
 name: ConnectionMsgs
-version: 1.1
+version: 1.2
 main: dev.newplaces.connectionmsgs.ConnectionMsgsPlugin
-author: Imptovskii
 api-version: 1.13
 commands:
   toggleconnectionmsgs:
     description: Toggles connection messages visibility for a player
+    usage: /<command>
+  togglefirstconnectionmsgs:
+    description: Toggles first connection messages visibility for a player
     usage: /<command>
   connectionmsgs:
     description: Admin commands for ConnectionMsgs plugin
