@@ -1,0 +1,19 @@
+messages:
+  toggle-off: '&aСообщения подключения были скрыты.'
+  toggle-on: '&aСообщения подключения снова видны.'
+  first-join-toggle-off: '&aСообщения о первом подключении были скрыты.'
+  first-join-toggle-on: '&aСообщения о первом подключении снова видны.'
+  join: '&7%player% присоединился к серверу'
+  quit: '&7%player% отключился от сервера'
+  first-join: '&aДобро пожаловать, %player%!&a Это ваш первый вход на сервер. Вы %count% игрок, присоединившийся к нам!'
+  console-error: '&cЭта команда может быть использована только игроком в игре.'
+  admin-help: |-
+    &eConnectionMsgs команды:
+    &b/connectionmsgs reload &7- перезагрузить конфигурацию
+    &b/connectionmsgs version &7- показать версию плагина
+  config-reloaded: '&aКонфигурация ConnectionMsgs успешно перезагружена!'
+  version-info: |-
+    &eConnectionMsgs версия: &b%version%
+    &eАвтор: &b%author%
+  unknown-subcommand: '&cНеизвестная подкоманда. Используйте /connectionmsgs без параметров для справки.'
+  console-only: '&cЭта команда доступна только в консоли сервера.'
