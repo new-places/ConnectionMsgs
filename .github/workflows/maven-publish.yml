@@ -57,7 +57,7 @@ jobs:
           Не используйте её на продакшен-серверах без тестирования!
           
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ConnectionMsgs-develop-build
         path: target/ConnectionMsgs-${{ env.PLUGIN_VERSION }}.jar
