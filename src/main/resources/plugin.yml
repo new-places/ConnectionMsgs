@@ -2,6 +2,7 @@ name: ConnectionMsgs
 version: 1.2
 main: dev.newplaces.connectionmsgs.ConnectionMsgsPlugin
 api-version: 1.13
+author: Imptovskii
 commands:
   toggleconnectionmsgs:
     description: Toggles connection messages visibility for a player
